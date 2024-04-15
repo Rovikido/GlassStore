@@ -1,0 +1,64 @@
+<!-- Показать сообщение о загрузке, если Glasses еще не загружены -->
+<p *ngIf="!glass">
+  <em>Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationangular">https://aka.ms/jspsintegrationangular</a> for more details.</em>
+</p>
+
+
+<div class="d-flex justify-content-center">
+
+
+  <!--<button (click)="loadIframe()" class="btn btn-primary w-75 align-content-center" data-bs-toggle="offcanvas" aria-controls="offcanvasExample" role="button">Try On</button>
+  <img *ngIf="iframeUrl !== ''" [src]="iframeUrl" width="600" height="400" frameborder="10" style="display: block; user-select: none; margin: auto; background-color: rgb(64, 64, 64);">
+   Кнопка для открытия модального окна--> 
+  <button (click)="loadMaskFrame()" class="btn btn-primary w-75 align-content-center" data-bs-toggle="modal" data-bs-target="#myModal">
+    Try On
+  </button>
+
+  <!-- Модальное окно -->
+  <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Try On</h5>
+          <button (click)="CloseMaskFrame()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <img *ngIf="iframeUrl !== ''" [src]="iframeUrl" class="img-fluid" alt="Mask">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div *ngIf="glass">
+  <div class="row">
+    <div class="col-md-6" style="width: 50%;">
+      <div class="row">
+        <div class="col-md-6" *ngFor="let photo of glassService.getGlassUrls(glass)">
+          <img [src]="photo" [alt]="glass.brand" style="max-width: 150%; max-height: 100%;" width="400" height="300">
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <h2>{{ glass.brand }} {{ glass.model }}</h2>
+      <p><strong>Цена:</strong> {{ glass.price }}</p>
+      <p><strong>Цвет оправы:</strong> {{ glass.frameColor }}</p>
+      <p><strong>Цвет линз:</strong> {{ glass.lensColor }}</p>
+      <p><strong>Материал оправы:</strong> {{ glass.frameMaterial }}</p>
+      <p><strong>Материал линз:</strong> {{ glass.lensMaterial }}</p>
+      <p><strong>Наличие рецепта:</strong> {{ glass.isPrescription ? 'Да' : 'Нет' }}</p>
+      <p><strong>Тип рецепта:</strong> {{ glass.prescriptionType }}</p>
+      <p><strong>Ширина оправы:</strong> {{ glass.frameWidth }}</p>
+      <p><strong>Ширина мостика:</strong> {{ glass.bridgeWidth }}</p>
+      <p><strong>Длина заушника:</strong> {{ glass.templeLength }}</p>
+      <p><strong>Пол:</strong> {{ glass.gender }}</p>
+      <p><strong>Форма:</strong> {{ glass.shape }}</p>
+      <p><strong>Стиль:</strong> {{ glass.style.join(', ') }}</p>
+      <p><strong>Кол-Во Фоток:</strong> {{ glass.photos.length }}</p>
+    </div>
+  </div>
+</div>

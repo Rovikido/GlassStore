@@ -1,0 +1,18 @@
+@GlassStore.Server_HostAddress = http://localhost:5279
+
+GET {{GlassStore.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+
+GET {{GlassStore.Server_HostAddress}}/glasses/
+Accept: application/json
+
+###
+
+GET {{GlassStore.Server_HostAddress}}/help/getimagebyid/653927fb47981feeebf70d97/0
+Accept: image/png
+
+###
+GET {{GlassStore.Server_HostAddress}}/help/testTask
+Accept: application/json

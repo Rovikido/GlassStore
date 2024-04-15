@@ -1,0 +1,11 @@
+router-outlet + * > * {
+  margin: 2rem;
+} 
+style.css
+
+
+<a class="navbar-brand" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Navbar</a>
+
+
+<ShouldRunBuildScript>false</ShouldRunBuildScript>
+  ng serve --host 0.0.0.0
