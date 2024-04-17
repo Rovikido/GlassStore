@@ -1,10 +1,10 @@
-﻿using GlassStore.Server.Domain.Models;
+﻿using GlassStore.Server.Domain.Models.Glass;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace GlassStore.Server.Repositories.Interfaces;
 
-    public interface iBaseRepository <T> where T : class
+public interface iBaseRepository <T> where T : class
 {
         Task<IEnumerable<T>> GetAllAsync();
         Task<DataList<T>> GetFirstAsync(int i);

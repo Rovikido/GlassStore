@@ -1,9 +1,9 @@
-﻿using GlassStore.Server.Domain.Models;
-using GlassStore.Server.Repositories.Interfaces;
+﻿using GlassStore.Server.Repositories.Interfaces;
 using MongoDB.Driver;
 using MongoDB.Bson;
 using System.ComponentModel.DataAnnotations;
 using SharpCompress.Compressors.ADC;
+using GlassStore.Server.Domain.Models.Glass;
 
 namespace GlassStore.Server.Repositories.Implementations;
 

@@ -2,9 +2,9 @@
 using MongoDB.Bson.Serialization.Attributes;
 using System.Collections.Generic;
 
-namespace GlassStore.Server.Domain.Models
+namespace GlassStore.Server.Domain.Models.Glass
 {
-    public class Glass: DbBase
+    public class Glasses : DbBase
     {
         // Existing properties...
 

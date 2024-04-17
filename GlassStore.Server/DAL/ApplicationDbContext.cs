@@ -1,6 +1,6 @@
-﻿
-using GlassStore.Server.Domain;
-using GlassStore.Server.Domain.Models;
+﻿using GlassStore.Server.Domain;
+using GlassStore.Server.Domain.Models.Auth;
+using GlassStore.Server.Domain.Models.Glass;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -17,13 +17,14 @@ public class ApplicationDbContext
     private readonly IMongoDatabase _mongoDatabase;
     private readonly IOptions<MongoSettings> _DBSettings;
 
-    public IMongoCollection<Glass> Glass;
+    public IMongoCollection<Glasses> Glass;
+    public IMongoCollection<Accounts> Account;
 
     //private readonly ILogger<ApplicationDbContext> _logger; 
 
     public IMongoCollection<T> dbSet<T>()
     {
-        return _mongoDatabase.GetCollection<T>(_DBSettings.Value.CollectionName);
+        return _mongoDatabase.GetCollection<T>(typeof(T).Name);
     }
 
 
@@ -49,7 +50,9 @@ public class ApplicationDbContext
 
     protected void OnConfiguring()
     {
-        Glass = dbSet<Glass>();
+        Glass = dbSet<Glasses>();
+        Account = dbSet<Accounts>();
+
     }
 
 

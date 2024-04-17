@@ -1,4 +1,4 @@
-﻿using GlassStore.Server.Domain.Models;
+﻿using GlassStore.Server.Domain.Models.Glass;
 using GlassStore.Server.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -15,12 +15,12 @@ namespace GlassStore.Service.Services
     public class DownloadService
     {
         ILogger<DownloadService> _logger;
-        private iBaseRepository<Glass> _data;
+        private iBaseRepository<Glasses> _data;
 
         //public DownloadService()
         //{
         //}
-        public DownloadService(ILogger<DownloadService> logger, iBaseRepository<Glass> data) { 
+        public DownloadService(ILogger<DownloadService> logger, iBaseRepository<Glasses> data) { 
             _logger = logger;
             _data = data;
         }
@@ -32,7 +32,7 @@ namespace GlassStore.Service.Services
 
             byte[] bytes;
 
-            IEnumerable<Glass> data = (await _data.GetAllAsync());
+            IEnumerable<Glasses> data = (await _data.GetAllAsync());
 
             int i = 1;
             foreach (var d in data)

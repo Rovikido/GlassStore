@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using GlassStore.Server.Repositories.Interfaces;
-using GlassStore.Server.Domain.Models;
 using System.IO;
 //using GlassStore.Service.Services;
 using Microsoft.AspNetCore.Http.HttpResults;
+using GlassStore.Server.Domain.Models.Glass;
 
 namespace GlassStore.Server.Controllers
 {
@@ -16,9 +16,9 @@ namespace GlassStore.Server.Controllers
         //private readonly DownloadService _downloadService;
         //private readonly IUserRepository _accountRepository;
 
-        private readonly iBaseRepository<Glass> _data;
+        private readonly iBaseRepository<Glasses> _data;
         //private readonly DownloadService _downloadService;
-        public HelpController(iBaseRepository<Glass> data, ILogger<HelpController> logger)
+        public HelpController(iBaseRepository<Glasses> data, ILogger<HelpController> logger)
         {
             //_articleService = articleService;
             //_downloadService = downloadService;

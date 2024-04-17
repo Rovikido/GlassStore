@@ -16,3 +16,8 @@ Accept: image/png
 ###
 GET {{GlassStore.Server_HostAddress}}/help/testTask
 Accept: application/json
+
+
+###
+GET {{GlassStore.Server_HostAddress}}/Auth/Login/q@gmail.com/qwerty
+Accept: application/json

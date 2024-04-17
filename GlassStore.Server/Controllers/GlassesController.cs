@@ -1,5 +1,6 @@
-﻿using GlassStore.Server.Domain.Models;
+﻿using GlassStore.Server.Domain.Models.Glass;
 using GlassStore.Server.Repositories.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -98,9 +99,9 @@ namespace GlassStore.Server.Controllers
     [Route("[controller]")]
     public class GlassesController : ControllerBase
     {
-        private readonly iBaseRepository<Glass> _data;
+        private readonly iBaseRepository<Glasses> _data;
 
-        public GlassesController(iBaseRepository<Glass> data)
+        public GlassesController(iBaseRepository<Glasses> data)
         {
             _data = data;
         }
@@ -109,9 +110,10 @@ namespace GlassStore.Server.Controllers
 
         // GET: api/<Glass>
         [HttpGet]
-        public async Task<DataList<Glass>> Get()
+        [Authorize]
+        public async Task<DataList<Glasses>> Get()
         {
-            DataList<Glass> data = new DataList<Glass>();
+            DataList<Glasses> data = new DataList<Glasses>();
             data.data = await _data.GetAllAsync();
             data.listSize = data.data.Count();
             return data;
@@ -121,9 +123,9 @@ namespace GlassStore.Server.Controllers
 
         //GET api/<Glass>/5
         [HttpGet("{id}")]
-        public async Task<Glass> Get(string id)
+        public async Task<Glasses> Get(string id)
         {
-            Glass data = await _data.GetByIdAsync(id);
+            Glasses data = await _data.GetByIdAsync(id);
             return data;
 
         }
@@ -139,9 +141,9 @@ namespace GlassStore.Server.Controllers
 
         // GET api/<Movie>/5
         [HttpGet("getslice/{from}/{to}")]
-        public async Task<ActionResult<DataList<Glass>>> GetSlice(int from, int to)
+        public async Task<ActionResult<DataList<Glasses>>> GetSlice(int from, int to)
         {
-            DataList<Glass> data = await _data.GetSliceAsync(from, to);
+            DataList<Glasses> data = await _data.GetSliceAsync(from, to);
             return Ok(data);
         }
 
