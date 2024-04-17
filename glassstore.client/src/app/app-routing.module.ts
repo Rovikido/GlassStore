@@ -5,6 +5,7 @@ import { Routes } from '@angular/router';
 import { GlassListComponent } from './components/glass/list/glassList.component';
 import { AppComponent } from './app.component';
 import { GlassInfoComponent } from './components/glass/info/glassInfo.component';
+import { LoginComponent } from './components/parts/Auth/login/login.component';
 
 
 
@@ -12,7 +13,8 @@ export const routes: Routes = [
   
   { path: "", component: WeatherComponent },
   { path: "GlassList", component: GlassListComponent },
-  { path: "GlassInfo/:id", component: GlassInfoComponent },    
+  { path: "GlassInfo/:id", component: GlassInfoComponent },
+  //{ path: "Login", component: LoginComponent }
   
   //{ path: "", component: AppComponent, children: [
   //    { path: "glass", component: GlassComponent }

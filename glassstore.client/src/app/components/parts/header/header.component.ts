@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, Routes } from '@angular/router';
+import { AuthService } from '../../../services/AuthService';
+import { AppComponent } from '../../../app.component';
 
 @Component({
   selector: 'app-header',
@@ -12,8 +14,18 @@ export class HeaderComponent {
   private IgnoreUrls = ['GlassInfo/:id',];
 
 
-  constructor(private router: Router) {
+  public get isLoggedIn(): boolean {
+    return this.auth.isAuthenticated();
+  }
+  public logout() {
+    this.auth.logout()
+  }
+
+  constructor(private router: Router, public auth: AuthService) {
+
+
     const routes: Routes = this.router.config;
+
 
     routes.forEach(route => {
       if (route.path !== '**' && route.path !== '' && route.path !== undefined) {
@@ -24,6 +36,7 @@ export class HeaderComponent {
     this.urls = this.urls.filter(url => !this.IgnoreUrls.includes(url));
     //this.urls.reduce('GlassInfo')
   }
+
 
   oninit(): void {}
 

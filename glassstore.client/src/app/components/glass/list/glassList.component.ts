@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Glasses } from '../../../models/Glasses';
 import { HttpClient } from '@angular/common/http';
-import { GlassService } from '../../../servises/Glass/GlassService';
+import { GlassService } from '../../../services/GlassService';
 
 
 @Component({

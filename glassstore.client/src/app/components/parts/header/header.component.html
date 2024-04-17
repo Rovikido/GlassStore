@@ -18,14 +18,35 @@
             {{ navUrl }}
           </a>
         </li>
-
-      </ul>
-
         <form class="d-flex">
           <input class="form-control me-sm-2" type="search" placeholder="Search" control-id="ControlID-1">
           <button class="btn btn-secondary my-2 my-sm-0" type="submit" control-id="ControlID-2">Search</button>
         </form>
+      </ul>
+
+
+
+      <div *ngIf="isLoggedIn; else loginLink">
+        <a class="navbar-brand" href="#">Orders</a>
+        <a class="navbar-brand" href="#" (click)="logout()">Logout</a>
       </div>
+      <ng-template #loginLink>
+        <button class=" navbar-brand" data-bs-toggle="modal" data-bs-target="#myModal">
+          Login
+        </button>
+
+        <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <app-login></app-login>
+              </div>
+            </div>
+          </div>
+
+      </ng-template>
+
+
+    </div>
     </div>
   </nav>
 

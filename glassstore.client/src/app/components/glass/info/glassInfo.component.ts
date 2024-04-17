@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { GlassService } from '../../../servises/Glass/GlassService';
+import { GlassService } from '../../../services/GlassService';
 import { Glasses } from '../../../models/Glasses';
 
 @Component({
