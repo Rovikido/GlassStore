@@ -5,6 +5,7 @@ import { ApplicationApiContext } from '../ApplicationApiContext';
 import { DataList } from '../../models/DataList';
 import { Glasses } from '../../models/Glasses';
 import { NONE_TYPE } from '@angular/compiler';
+//import { environment } from '../../environments/environment';
 
 
 @Injectable({
@@ -54,16 +55,19 @@ export class GlassService {
 
 
   public getGlassUrls(glass: Glasses, getfirst: boolean = false): string[] {
-    
-
     const id = glass.id;
     const urls: string[] = [];
     if (getfirst) { return [`${this.baseUrl}/Help/GetImageById/${id}/${0}`] }
     for (let i = 0; i < glass.photos.length; i++) {
-      urls.push(`${this.baseUrl}/Help/GetImageById/${id}/${i}`);
+      //urls.push(`${this.baseUrl}/Help/GetImageById/${id}/${i}`);
+      urls.push('/help/GetImageById/' + glass.id + '/' + i);
+
     }
     return urls;
   }
+  //public getGlassesRange(glass: Glasses): number[] {
+  //  return Array.from({ length: glass.photos.length }, (v, k) => k);
+  //}
 
   //constructor(private http: HttpClient, private Config: ApplicationApiContext) { }
   //private apiUrl?: string;

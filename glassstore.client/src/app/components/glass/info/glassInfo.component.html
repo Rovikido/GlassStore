@@ -40,6 +40,9 @@
         <div class="col-md-6" *ngFor="let photo of glassService.getGlassUrls(glass)">
           <img [src]="photo" [alt]="glass.brand" style="max-width: 150%; max-height: 100%;" width="400" height="300">
         </div>
+        <!--<div class="col-md-6" *ngFor="let n of glassService.getGlassesRange(glass)">
+          <img [src]="'/help/GetImageById/' + glass.id + '/' + n" [alt]="glass.brand" style="max-width: 150%; max-height: 100%;" width="400" height="300">
+        </div>-->
       </div>
     </div>
 

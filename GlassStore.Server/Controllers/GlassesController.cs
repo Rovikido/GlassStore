@@ -110,7 +110,7 @@ namespace GlassStore.Server.Controllers
 
         // GET: api/<Glass>
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         public async Task<DataList<Glasses>> Get()
         {
             DataList<Glasses> data = new DataList<Glasses>();
