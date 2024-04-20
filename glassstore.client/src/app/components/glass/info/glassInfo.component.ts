@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GlassService } from '../../../services/GlassService';
-import { Glasses } from '../../../models/Glasses';
+import { Glasses } from '../../../models/Glasses/Glasses';
+import { environment } from '../../../enviroment';
 
 @Component({
   selector: 'app-glassInfo',
@@ -25,7 +26,7 @@ export class GlassInfoComponent implements OnInit {
     console.log(this.glassId)
   }
 
-  private MaskApi: string = 'http://127.0.0.1:5000';
+  private MaskApi: string = environment.maskApi;
   public iframeUrl: string = ''; // URL для загрузки в iframe
 
   public loadMaskFrame(): void {

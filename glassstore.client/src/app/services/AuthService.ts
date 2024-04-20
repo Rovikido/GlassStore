@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
-import { Token } from '../models/Token';
+import { Token } from '../models/Auth/Token';
 import { HttpClient } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';

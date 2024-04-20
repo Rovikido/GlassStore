@@ -1,5 +1,7 @@
 ﻿using GlassStore.Server.Domain.Models.Glass;
+using GlassStore.Server.Domain.Models.User;
 using GlassStore.Server.Repositories.Interfaces;
+using GlassStore.Server.Servise.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -113,6 +115,8 @@ namespace GlassStore.Server.Controllers
         //[Authorize]
         public async Task<DataList<Glasses>> Get()
         {
+            
+
             DataList<Glasses> data = new DataList<Glasses>();
             data.data = await _data.GetAllAsync();
             data.listSize = data.data.Count();

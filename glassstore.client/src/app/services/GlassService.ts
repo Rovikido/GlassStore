@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
-import { DataList } from '../models/DataList';
-import { Glasses } from '../models/Glasses';
+import { DataList } from '../models/Glasses/DataList';
+import { Glasses } from '../models/Glasses/Glasses';
 import { NONE_TYPE } from '@angular/compiler';
 //import { environment } from '../../environments/environment';
 

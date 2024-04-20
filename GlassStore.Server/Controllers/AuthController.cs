@@ -7,7 +7,7 @@ namespace GlassStore.Server.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class AuthController : ControllerBase
+    public class AuthController : ControllerBase // Tokens
     {
         private readonly AuthServise authServise;
         public AuthController(AuthServise authServise)

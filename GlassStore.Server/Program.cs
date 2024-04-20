@@ -1,12 +1,16 @@
 using GlassStore.Server.DAL.Implementations;
+using GlassStore.Server.DAL.Interfaces;
 using GlassStore.Server.Domain;
 using GlassStore.Server.Domain.Models;
 using GlassStore.Server.Domain.Models.Auth;
 using GlassStore.Server.Repositories.Implementations;
 using GlassStore.Server.Repositories.Interfaces;
 using GlassStore.Server.Servise.Auth;
+using GlassStore.Server.Servise.Helpers;
+using GlassStore.Server.Servise.User;
 using GlassStore.Service.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
@@ -36,12 +40,14 @@ builder.Services.AddSingleton<ApplicationDbContext>();
 builder.Services.AddScoped(typeof(iBaseRepository<>), typeof(BaseRepository<>));
 
 //builder.Services.AddScoped<BaseRepository<Accounts>,AuthRepository>();
-builder.Services.AddScoped<AuthRepository>();
+//builder.Services.AddScoped<UserRepository>();
+builder.Services.AddScoped<iUserRepository, UserRepository>();
 
 /*############################## Services ######################################################*/
 //builder.Services.AddScoped<DownloadService>();
 builder.Services.AddScoped<AuthServise>();
-
+builder.Services.AddScoped<UserServise>();
+builder.Services.AddTransient<HttpService>();
 /*################################### Auth ##################################################*/
 builder.Services.Configure<AuthOptions>(builder.Configuration.GetSection("Auth"));
 
@@ -64,6 +70,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateIssuerSigningKey = true,
         };
     });
+
+builder.Services.AddHttpContextAccessor();
+
+/*############################## AddAutoMapper ######################################################*/
+builder.Services.AddAutoMapper(typeof(Program));
 
 /*############################## localhost 4200 ######################################################*/
 //builder.Services.AddCors(options => { 

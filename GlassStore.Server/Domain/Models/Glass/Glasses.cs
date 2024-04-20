@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson;
+﻿
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System.Collections.Generic;
 
@@ -8,9 +9,8 @@ namespace GlassStore.Server.Domain.Models.Glass
     {
         // Existing properties...
 
-
         [BsonElement("price")]
-        public decimal price { get; set; } // Цена
+        public decimal Price { get; set; } // Цена
 
         [BsonElement("brand")]
         public string Brand { get; set; } // Бренд

@@ -1,6 +1,8 @@
 ﻿
 using GlassStore.Server.DAL.Implementations;
+using GlassStore.Server.DAL.Interfaces;
 using GlassStore.Server.Domain.Models.Auth;
+using GlassStore.Server.Domain.Models.User;
 using Microsoft.AspNetCore.Authentication.OAuth;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -12,14 +14,14 @@ namespace GlassStore.Server.Servise.Auth
     public class AuthServise
     {
         private readonly IOptions<AuthOptions> authoptions;
-        private readonly AuthRepository authRepository;
-        public AuthServise(AuthRepository authRepository, IOptions<AuthOptions> authOptions) {
+        private readonly iUserRepository authRepository;
+        public AuthServise(iUserRepository authRepository, IOptions<AuthOptions> authOptions) {
             this.authoptions = authOptions;
             this.authRepository = authRepository;
         }
         public async Task<Accounts> AuthentificateUser(string email, string password)
         {
-            return await authRepository.FindUser(email, password);
+            return await authRepository.FindUserAuth(email, password);
         }
 
         public string GenerateJWT(Accounts user)
@@ -30,8 +32,10 @@ namespace GlassStore.Server.Servise.Auth
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
             var claims = new List<Claim>() {
+                        //new Claim (JwtRegisteredClaimNames.NameId, user.Id),
+                        new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
                         new Claim (JwtRegisteredClaimNames.Email, user.Email),
-                        new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString())
+
                     };
             foreach (var role in user.Roles)
             {
@@ -46,5 +50,7 @@ namespace GlassStore.Server.Servise.Auth
             return new JwtSecurityTokenHandler().WriteToken(token);
             
         } 
+
+
     }
 }

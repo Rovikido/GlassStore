@@ -15,6 +15,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { UserComponent } from './components/user/user.component';
 
 
 //const { env } = require('process');
@@ -31,11 +32,13 @@ export function tokenGetter() {
     GlassListComponent,
     GlassInfoComponent,
     LoginComponent,
+    UserComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
+
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,

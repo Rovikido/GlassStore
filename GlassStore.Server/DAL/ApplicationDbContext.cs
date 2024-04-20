@@ -1,6 +1,7 @@
 ﻿using GlassStore.Server.Domain;
 using GlassStore.Server.Domain.Models.Auth;
 using GlassStore.Server.Domain.Models.Glass;
+using GlassStore.Server.Domain.Models.User;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
