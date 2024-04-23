@@ -24,13 +24,19 @@ namespace GlassStore.Server.Controllers
         [Authorize]
         public async Task<IActionResult> Index()
         {
-
-            await userServise.AddOrder(new Orders()
+            try
             {
-                Glasses = (await glasses.GetFirstAsync(1)).data.ToList(),
-                OrderDate = DateTime.Now
-            });
-            return Ok();
+                //await userServise.AddOrder(new Orders()
+                //{
+                //    Glasses = (await glasses.GetFirstAsync(1)).data.ToList(),
+                //});
+
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
     }
 }

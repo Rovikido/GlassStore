@@ -1,0 +1,8 @@
+<p>{{user.email}}</p>
+<div *ngFor="let order of user.orders">
+  <div *ngFor="let glass of order.glasses">
+    <p>{{glass.brand}}</p>
+  </div>
+  <p>{{order.totalPrice}} $</p>
+  <p>{{order.orderDate}}</p>
+</div>

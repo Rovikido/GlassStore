@@ -43,7 +43,7 @@ namespace GlassStore.Server.Controllers
             if (photos == null)
             {
                 string fileWay = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img", "base-article-photo.jpg");
-                var noPhoto = System.IO.File.ReadAllBytes(fileWay);
+                var noPhoto = await System.IO.File.ReadAllBytesAsync(fileWay);
                 return File(noPhoto, "image/jpeg");
             }
 

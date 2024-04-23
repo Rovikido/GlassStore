@@ -2,20 +2,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { WeatherComponent } from './components/weather/weather.component';
 import { BrowserModule } from '@angular/platform-browser';
-import { GlassListComponent } from './components/glass/list/glassList.component';
-import { HeaderComponent } from './components/parts/header/header.component';
-import { GlassInfoComponent } from './components/glass/info/glassInfo.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { environment } from './enviroment';
-import { ACCESS_TOKEN } from './services/AuthService';
-import { LoginComponent } from './components/parts/Auth/login/login.component';
-import { MatCardModule } from '@angular/material/card';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { UserComponent } from './components/user/user.component';
+import { ACCESS_TOKEN } from './services/Auth.service';
+import { WeatherComponent } from './pages/components/weather/weather.component';
+import { HeaderComponent } from './pages/layout/header/header.component';
+import { AuthModule } from './pages/layout/Auth/auth.module';
 
 
 //const { env } = require('process');
@@ -29,20 +22,14 @@ export function tokenGetter() {
     AppComponent,
     WeatherComponent,
     HeaderComponent,
-    GlassListComponent,
-    GlassInfoComponent,
-    LoginComponent,
-    UserComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
 
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
+    AuthModule,
+
     //JwtModule.forRoot({
     //  config: {
     //    tokenGetter: () => {

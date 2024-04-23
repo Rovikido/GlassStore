@@ -10,9 +10,13 @@ using System.Runtime;
 //using Microsoft.EntityFrameworkCore;
 //using MongoDB.EntityFrameworkCore.Extensions;
 
+public interface IApplicationDbContext
+{
+    IMongoCollection<T> dbSet<T>();
 
+}
 
-public class ApplicationDbContext
+public class ApplicationDbContext: IApplicationDbContext
 {
 
     private readonly IMongoDatabase _mongoDatabase;

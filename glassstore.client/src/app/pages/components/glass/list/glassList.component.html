@@ -1,0 +1,62 @@
+<!-- Показать сообщение о загрузке, если Glasses еще не загружены -->
+<p *ngIf="!glasses">
+  <em>Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationangular">https://aka.ms/jspsintegrationangular</a> for more details.</em>
+</p>
+
+
+<div *ngIf="glasses">
+  <div class="row">
+    <div *ngFor="let glass of glasses" class="col-md-3">
+      <div class="card mb-3">
+        <h3 class="card-header">{{ glass.brand }} {{ glass.model }}</h3>
+        <div class="card-body">
+          <h5 class="card-title">{{ glass.price }}$</h5>
+          <h6 class="card-subtitle text-muted">Support card subtitle</h6>
+        </div>
+        <!--<img [src]="glassService.get_Glass_img(glass.id)" class="d-block user-select-none" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">-->
+        <img [src]="'/help/GetImageById/' + glass.id" class="d-block user-select-none" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
+        <div class="card-body">
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+        <div class="card-body">
+          <a [routerLink]="glass.id" class="btn btn-secondary">Buy</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Показать информацию о очках, если они загружены -->
+<!--<div *ngIf="glasses">
+  <div *ngFor="let glass of glasses">
+    <h2>{{ glass.brand }} {{ glass.model }}</h2>
+    <p><strong>Цена:</strong> {{ glass.price }}</p>
+    <p><strong>Цвет оправы:</strong> {{ glass.frameColor }}</p>-->
+<!--<p><strong>Цвет линз:</strong> {{ glass.lensColor }}</p>
+<p><strong>Материал оправы:</strong> {{ glass.frameMaterial }}</p>
+<p><strong>Материал линз:</strong> {{ glass.lensMaterial }}</p>
+<p><strong>Наличие рецепта:</strong> {{ glass.isPrescription ? 'Да' : 'Нет' }}</p>
+<p><strong>Тип рецепта:</strong> {{ glass.prescriptionType }}</p>
+<p><strong>Ширина оправы:</strong> {{ glass.frameWidth }}</p>
+<p><strong>Ширина мостика:</strong> {{ glass.bridgeWidth }}</p>
+<p><strong>Длина заушника:</strong> {{ glass.templeLength }}</p>-->
+<!--<p><strong>Пол:</strong> {{ glass.gender }}</p>
+<p><strong>Форма:</strong> {{ glass.shape }}</p>
+<p><strong>Стиль:</strong> {{ glass.style.join(', ') }}</p>-->
+<!--<p><strong>Кол-Во Фоток:</strong> {{ glass.photos.length }}</p>-->
+<!--<div *ngFor="let index of Array.from({length: glass.photos.length}, (_, i) => i + 1)">
+<img [src]="'http://localhost:5294/Help/GetImageById/' + glass.id + '/' + index" [alt]="glass.brand" width="300" height="400">-->
+<!--<div *ngFor="let photo of getGlassUrls(glass)">
+      <img [src]="photo" [alt]="glass.brand" width="300" height="400">
+</div>-->
+<!--<img [src]="getGlassUrls(glass, true)[0]" [alt]="glass.brand" width="300" height="400">-->
+<!--<img [src]="'http://localhost:5294/Help/GetImageById/' + movie.id" [alt]="movie.title" width="300" height="400">-->
+<!--<img [src]="glass.photo" [alt]="glass.brand + ' ' + glass.model" width="300" height="400">-->
+<!--<a>####################################################</a>
+  </div>
+</div>-->
+<!-- Кнопка для загрузки дополнительных очков -->
+<!--<button (click)="getmoreGlasses(3)" [disabled]="isLoading">More</button>-->

@@ -3,6 +3,7 @@ using GlassStore.Server.DAL.Interfaces;
 using GlassStore.Server.Servise.Helpers;
 using GlassStore.Server.Domain.Models.Auth;
 using AutoMapper;
+using System.Linq;
 
 
 
@@ -17,6 +18,7 @@ namespace GlassStore.Server.Servise.User
 
         public UserServise(iUserRepository userRepository, HttpService httpService, IMapper mapper)
         {
+            _userRepository = userRepository;
             this.httpService = httpService;
             this.mapper = mapper;
         }
@@ -26,29 +28,26 @@ namespace GlassStore.Server.Servise.User
             return mapper.Map<UserInfo>(account);
         }
 
-        public async Task<bool> AddOrder(Orders orders) {
+        public async Task<bool> AddOrder(Orders order)
+        {
             try
             {
+                order.OrderDate = DateTime.Now;
+                order.TotalPrice = (double)order.Glasses.Sum(x => x.Price);
                 Accounts user = await httpService.GetCurrentUser();
                 if (user.Orders == null)
                 {
                     user.Orders = new List<Orders>();
                 }
-                user.Orders.Add(orders);
+                user.Orders.Add(order);
                 await _userRepository.UpdateAsync(user.Id, user);
                 return true;
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex);
                 return false;
             }
-            //var userId = httpService.GetCurrentUserId();
-
-            //Accounts user = await _userRepository.GetByIdAsync(userId);
-            //user.Orders.Add(orders);
-            //_userRepository.UpdateAsync(userId, user);
-
-             
         }
 
         //public async Task<List<T>> GetField<T>()

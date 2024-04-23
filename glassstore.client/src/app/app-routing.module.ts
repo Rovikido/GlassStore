@@ -1,19 +1,26 @@
 import { NgModule } from '@angular/core';
-import { WeatherComponent } from './components/weather/weather.component';
 import { RouterModule } from '@angular/router';
 import { Routes } from '@angular/router';
-import { GlassListComponent } from './components/glass/list/glassList.component';
-import { AppComponent } from './app.component';
-import { GlassInfoComponent } from './components/glass/info/glassInfo.component';
-import { LoginComponent } from './components/parts/Auth/login/login.component';
+import { WeatherComponent } from './pages/components/weather/weather.component';
 
 
 
 export const routes: Routes = [
   
   { path: "", component: WeatherComponent },
-  { path: "GlassList", component: GlassListComponent },
-  { path: "GlassInfo/:id", component: GlassInfoComponent },
+
+  {
+    path: 'Glasses',
+    loadChildren: () => import('./pages/components/glass/glasses.module').then(m => m.GlassesModule)
+  },
+  {
+    path: 'User',
+    loadChildren: () => import('./pages/components/user/user.module').then(m => m.UserModule)
+  },
+  //{
+  //  path: 'User',
+  //  loadChildren: () => import('./pages/components/user/user.module').then(m => m.UserModule)
+  //},
   //{ path: "Login", component: LoginComponent }
   
   //{ path: "", component: AppComponent, children: [

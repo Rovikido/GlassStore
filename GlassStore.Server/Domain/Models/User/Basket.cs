@@ -6,8 +6,6 @@ namespace GlassStore.Server.Domain.Models.User
     {
         public List<Glasses> Glasses { get; set; }
 
-        public decimal TotalPrice => Glasses.Sum(g => g.Price);  //!!!!!
-
-
+        public double TotalPrice { get; set; }
     }
 }

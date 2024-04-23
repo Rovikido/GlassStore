@@ -7,4 +7,10 @@
     <!-- Folder where production build objects will be placed -->
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist\glassstore.client\</BuildOutputFolder>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="src\app\services\user.service.spec.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\app\pages\layout\Auth\register\" />
+  </ItemGroup>
 </Project>
