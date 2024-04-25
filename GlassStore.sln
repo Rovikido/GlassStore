@@ -7,9 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GlassStore.Server", "GlassS
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "glassstore.client", "glassstore.client\glassstore.client.esproj", "{3277EA0A-C9F5-4A67-919A-92837EDB5C2C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GlassStore.Server.NUnitTests", "GlassStore.NUnitTests\GlassStore.Server.NUnitTests.csproj", "{51DAFC64-B2DC-48BB-BA6C-82A518FAFB52}"
-	ProjectSection(ProjectDependencies) = postProject
-		{2B786ECE-666C-40FB-A3F5-1907AD878540} = {2B786ECE-666C-40FB-A3F5-1907AD878540}
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GlassStore.ServerTests", "GlassStore.ServerTests\GlassStore.ServerTests.csproj", "{71E8CFB5-50DE-4A81-BDA1-A567C73DF9D0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ArMask", "ArMask", "{2A8D6017-96DF-41B0-BA30-8841E5B257D3}"
+	ProjectSection(SolutionItems) = preProject
+		ArMask\2.png = ArMask\2.png
+		ArMask\api_patern.py = ArMask\api_patern.py
+		ArMask\api_patern_Tests.py = ArMask\api_patern_Tests.py
 	EndProjectSection
 EndProject
 Global
@@ -28,10 +32,10 @@ Global
 		{3277EA0A-C9F5-4A67-919A-92837EDB5C2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3277EA0A-C9F5-4A67-919A-92837EDB5C2C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3277EA0A-C9F5-4A67-919A-92837EDB5C2C}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{51DAFC64-B2DC-48BB-BA6C-82A518FAFB52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{51DAFC64-B2DC-48BB-BA6C-82A518FAFB52}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{51DAFC64-B2DC-48BB-BA6C-82A518FAFB52}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{51DAFC64-B2DC-48BB-BA6C-82A518FAFB52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71E8CFB5-50DE-4A81-BDA1-A567C73DF9D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71E8CFB5-50DE-4A81-BDA1-A567C73DF9D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71E8CFB5-50DE-4A81-BDA1-A567C73DF9D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71E8CFB5-50DE-4A81-BDA1-A567C73DF9D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
