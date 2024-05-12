@@ -12,6 +12,8 @@ from PIL import Image
 import io
 from rembg import remove
 import urllib3
+from pathlib import Path
+
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # Инициализация глобальной переменной streaming
@@ -32,6 +34,8 @@ class MaskLoader(ABC):
         mask = cv2.imdecode(np.frombuffer(bytes_data, np.uint8), cv2.IMREAD_UNCHANGED)
 
         return mask
+
+
 class MaskLoaderFromLocal(MaskLoader):
     def load_mask(self, url):
         """
@@ -43,6 +47,8 @@ class MaskLoaderFromLocal(MaskLoader):
         # Удаление фона
         output_image = remove(input_image)
         return self.toggle_streaming(output_image)
+
+
 class MaskLoaderFromUrl(MaskLoader):
     def load_mask(self, url):
         """
@@ -54,6 +60,7 @@ class MaskLoaderFromUrl(MaskLoader):
 
         return self.toggle_streaming(output_image)
 
+
 def detect_faces(frame, face_cascade):
     """
     Обнаружение лиц на кадре.
@@ -61,6 +68,7 @@ def detect_faces(frame, face_cascade):
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     faces = face_cascade.detectMultiScale(gray, 1.3, 5)
     return faces
+
 
 def apply_mask(frame, mask, faces):
     """
@@ -76,17 +84,17 @@ def apply_mask(frame, mask, faces):
         face_aspect_ratio = w / h
 
         if mask_aspect_ratio > face_aspect_ratio:
-            new_w = int(w * 1.48)  # увеличиваем на 30%
+            new_w = int(w * 2.9)  # увеличиваем на 30%
             new_h = int(new_w / mask_aspect_ratio)
         else:
-            new_h = int(h * 1.48)  # увеличиваем на 30%
+            new_h = int(h * 2.9)  # увеличиваем на 30%
             new_w = int(new_h * mask_aspect_ratio)
 
         resized_mask = cv2.resize(mask, (new_w, new_h))
 
         # Центрирование маски относительно лица
-        x_offset = (w - new_w) // 2
-        y_offset = (h - new_h) // 2 - 10
+        x_offset = (w - new_w) // 2 - 10
+        y_offset = (h - new_h) // 2 - 30
         x1 += x_offset
         y1 += y_offset
         x2 = x1 + new_w
@@ -97,14 +105,27 @@ def apply_mask(frame, mask, faces):
             frame[y1:y2, x1:x2, c] = (frame[y1:y2, x1:x2, c] * (1 - resized_mask[:, :, 3] / 255.0)
                                        + resized_mask[:, :, c] * (resized_mask[:, :, 3] / 255.0))
     return frame
-def gen_frames(path, mask_loader: MaskLoader):
+
+
+def gen_frames(path, mask_loader: MaskLoader, use_test_image=False, return_cv2=False):
+    image = Path(path)
+    if not image.is_file():
+        raise Exception("File does not exist")
+    if not mask_loader:
+        raise Exception("MaskLoader must be provided")
     # mask_path = "Glasses/1/2.png"
     mask = mask_loader.load_mask(path)
     face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
-    camera = cv2.VideoCapture(0)
+    if not use_test_image:
+        camera = cv2.VideoCapture(0)
 
     while True:
-        success, frame = camera.read()
+        if not use_test_image:
+            success, frame = camera.read()
+        else:
+            im = cv2.imread('front_face_testing.png')
+            frame = cv2.cvtColor(im, cv2.COLOR_BGR2RGB)
+            success = True, 
         if not success:
             break
         else:
@@ -112,8 +133,11 @@ def gen_frames(path, mask_loader: MaskLoader):
             frame_with_mask = apply_mask(frame, mask, faces)
             ret, buffer = cv2.imencode('.jpg', frame_with_mask)
             frame = buffer.tobytes()
-            yield (b'--frame\r\n'
-                   b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+            if not return_cv2:
+                yield (b'--frame\r\n'
+                    b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+            else:
+                yield frame_with_mask
 
 
 @app.route('/')
@@ -127,11 +151,13 @@ def video_feed(id):
     if id == "None":
         mask_loader = MaskLoaderFromLocal()
         path = "2.png"
+        use_test_image=True
     else:
         mask_loader = MaskLoaderFromUrl()
         path = f"https://localhost:7042/help/getimagebyid/{id}/1"
+        use_test_image=False
     print(f"Received id: {id}")
-    return Response(gen_frames(path, mask_loader), mimetype='multipart/x-mixed-replace; boundary=frame')
+    return Response(gen_frames(path, mask_loader, use_test_image=use_test_image), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 
@@ -140,14 +166,18 @@ def stop_stream():
     print("Stream stopped")
     return "Stream stopped"
 
+
+def main():
+    try:
+        app.run(host='0.0.0.0', port=5000, debug=True)
+    except Exception as e:
+        print(f"An error occurred: {e}. Restarting the application...")
+    except GeneratorExit:
+        print("User disconnected")
+
+
 if __name__ == '__main__':
-    # while True:
-        try:
-            app.run(host='0.0.0.0', port=5000, debug=True)
-        except Exception as e:
-            print(f"An error occurred: {e}. Restarting the application...")
-        except GeneratorExit:
-            print("User disconnected")
+    main()
 # https://localhost:7042/help/getimagebyid/653927fb47981feeebf70d97/1
 
 # import numpy as np
